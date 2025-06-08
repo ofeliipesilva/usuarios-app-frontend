@@ -1,9 +1,12 @@
 // src/services/api.ts
    import axios from 'axios';
 
+   // Obtém a URL base da API das variáveis de ambiente
+   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333/api';
+
    // Cria uma instância do axios com a URL base da API
    const api = axios.create({
-     baseURL: 'http://localhost:3333/api',
+     baseURL: apiUrl,
    });
 
    // Adiciona um interceptor para tratar erros
