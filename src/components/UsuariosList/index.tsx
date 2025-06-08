@@ -1,5 +1,4 @@
 // src/components/UsuariosList/index.tsx
-   import { useState } from 'react';
    import { 
      Table, 
      TableBody, 
@@ -10,12 +9,13 @@
      Paper, 
      Avatar, 
      Button,
-     CircularProgress,
      Typography,
      Box
    } from '@mui/material';
    import { useNavigate } from 'react-router-dom';
-   import { Usuario } from '../../types';
+   import type { Usuario } from '../../types';
+   import Loading from '../Loading';
+   import ErrorMessage from '../ErrorMessage';
 
    interface UsuariosListProps {
      usuarios: Usuario[];
@@ -31,19 +31,11 @@
      };
 
      if (loading) {
-       return (
-         <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
-           <CircularProgress />
-         </Box>
-       );
+       return <Loading message="Carregando usuários..." />;
      }
 
      if (error) {
-       return (
-         <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
-           <Typography color="error">{error}</Typography>
-         </Box>
-       );
+       return <ErrorMessage message={error} />;
      }
 
      if (usuarios.length === 0) {
